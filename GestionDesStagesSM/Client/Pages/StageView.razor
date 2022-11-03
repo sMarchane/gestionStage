@@ -1,0 +1,53 @@
+﻿@page "/stageview"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Etudiant,Entreprise")]
+
+<h1> Tableau des offres de stage </h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Statut</th>
+            <th>Création</th>
+            <AuthorizeView Policy="@GestionDesStagesSM.Shared.Policies.Policies.EstEntreprise">
+                <Authorized>
+                    <th></th>
+                </Authorized>
+
+
+            </AuthorizeView>
+        </tr>
+    </thead>
+
+<tbody>
+    @foreach (var stage in Stages){
+        <tr>
+            <AuthorizeView>
+                    <Authorized>
+                        @if(context.User.IsInRole("Entreprise")){
+                            <td>
+                                <a style="font-style:italic;text-decoration:underline" href="@($"stageedit/{stage.StageId}")"> 
+                                @stage.Titre
+                                </a>
+                            </td>
+
+
+                        }else{
+                            <td>@stage.Titre</td>
+                        }
+
+
+                    </Authorized>
+            </AuthorizeView>
+            
+            <td>@stage.Description</td>
+            <td>@stage.StageStatut?.DescriptionStatut</td>
+            <td>@stage.DateCreation.ToString("yyyy-MM-dd")</td>
+        </tr>
+    }
+</tbody>
+</table>
+
+

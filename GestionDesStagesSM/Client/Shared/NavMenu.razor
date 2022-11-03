@@ -15,15 +15,37 @@
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
+            <AuthorizeView Policy="@GestionDesStagesSM.Shared.Policies.Policies.EstEntreprise">
+            <Authorized>
+                    <NavLink class="nav-link" href="stageedit_">
+                <span class="oi oi-plus" aria-hidden="true"></span> Ajouter un stage
             </NavLink>
+                    <NavLink class="nav-link" href="stageview">
+                <span class="oi oi-plus" aria-hidden="true"></span> Tableau des stages
+            </NavLink>
+            </Authorized>
+                    </AuthorizeView>
+        </div>
+        <div class="nav-item px-3">
+            <AuthorizeView Policy="@GestionDesStagesSM.Shared.Policies.Policies.EstEtudiant">
+                <Authorized>
+                    <NavLink class="nav-link" href="stageview">
+                        <span class="oi oi-plus" aria-hidden="true"></span> Tableau des stages
+                    </NavLink>
+                    <li class="nav-item px-3">
+                        <NavLink class="nav-link" href="etudiantedit">
+                            <span class="oi oi-list-rich" aria-hidden="true"></span> Mon profil
+                        </NavLink>
+                    </li>
+                </Authorized>
+            </AuthorizeView>
         </div>
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="fetchdata">
                 <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
             </NavLink>
         </div>
+
     </nav>
 </div>
 
