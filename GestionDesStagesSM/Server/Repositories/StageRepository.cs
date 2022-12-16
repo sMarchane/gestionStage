@@ -4,15 +4,18 @@ using GestionDesStagesSM.Shared.Modele;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace GestionDesStagesSM.Server.Repositories
 {
     public class StageRepository: IStageRepository
     {
         private readonly ApplicationDbContext _appDbContext;
+        private readonly ILogger<StageRepository> _logger;
 
-        public StageRepository(ApplicationDbContext appDbContext)
+        public StageRepository(ApplicationDbContext appDbContext, ILogger<StageRepository> logger)
         {
             _appDbContext = appDbContext;
+            this._logger = logger;
         }
 
         public Stage AddStage(Stage stage)
@@ -66,6 +69,31 @@ namespace GestionDesStagesSM.Server.Repositories
             }
             return stage;
         }
+        public PostulerStage PostulerStage(PostulerStage postulerStage)
+        {
+            try
+            {
+                // Vérifier si l'étudiant n'a pas déjà postuler pour ce stage.
+                var foundPostulerStage = _appDbContext.PostulerStage.FirstOrDefault(e => e.StageId == postulerStage.StageId && e.Id == postulerStage.Id);
 
+                // Si null il n'a pas postulé
+                if (foundPostulerStage == null)
+                {
+                    var addedEntity = _appDbContext.PostulerStage.Add(postulerStage);
+                    _appDbContext.SaveChanges();
+                    return addedEntity.Entity;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Erreur dans la création d'un enregistrement {ex}");
+                return null;
+            }
+
+        }
     }
 }

@@ -1,7 +1,10 @@
 ﻿using GestionDesStagesSM.Shared.Modele;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
+using System.Security.Claims;
+using GestionDesStagesSM.Client.Interfaces;
+using System.Net.Http;
+using System.Text.Json;
 
 namespace GestionDesStagesSM.Client.Pages
 {
@@ -13,6 +16,16 @@ namespace GestionDesStagesSM.Client.Pages
         [Inject]
         public AuthenticationStateProvider GetAuthenticationStateAsync { get; set; }
 
+        [Inject]
+        public IStageDataService StageDataService { get; set; }
+
+        [Inject]
+        public IStageStatutDataService StageStatutDataService { get; set; }
+
+        [Parameter]
+        public string StageId { get; set; }
+
+        public string LibelleBoutonEnregistrer { get; set; }
         public Stage Stage { get; set; } = new Stage();
 
         public List<StageStatut> StageStatut { get; set; } = new List<StageStatut>();

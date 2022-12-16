@@ -12,5 +12,7 @@ namespace GestionDesStagesSM.Server.Interfaces
         Stage GetStageByStageId(string id);
 
         Stage UpdateStage(Stage stage);
+
+        PostulerStage PostulerStage(PostulerStage postulerStage);
     }
 }

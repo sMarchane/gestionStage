@@ -26,6 +26,14 @@ namespace GestionDesStagesSM.Server.Data
         {
             get; set;
         }
+        public DbSet<PostulerStage> PostulerStage 
+        { 
+            get; set; 
+        }
+        public DbSet<Entreprise> Entreprise
+        {
+            get; set;
+        }
 
     }
 }

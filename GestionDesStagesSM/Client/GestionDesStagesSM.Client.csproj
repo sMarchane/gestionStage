@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\ConfirmationPostulerStage.razor" />
     <Content Remove="Pages\StageEdit.razor" />
   </ItemGroup>
 
@@ -30,7 +31,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\ConfirmationPostulerStage.razor" />
     <_ContentIncludedByDefault Remove="Pages\StageEdit.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\ConfirmationPostulerStage.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\ConfirmationPostulerStage.razor" />
   </ItemGroup>
 
 </Project>

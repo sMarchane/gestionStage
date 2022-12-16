@@ -32,12 +32,19 @@
                                 @stage.Titre
                                 </a>
                             </td>
-
-
-                        }else{
-                            <td>@stage.Titre</td>
                         }
-
+                        else if (context.User.IsInRole("Etudiant"))
+                        {
+                            <td>
+                                <a style="font-style:italic;text-decoration:underline" href="@($"stagedetail/{stage.StageId}")">
+                                    @stage.Titre
+                                </a>
+                            </td>
+                        }else{
+                        <a style="font-style:italic;text-decoration:underline" href="@($"stagedetail/{stage.StageId}")">
+                            @stage.Titre
+                        </a>
+                        }
 
                     </Authorized>
             </AuthorizeView>
